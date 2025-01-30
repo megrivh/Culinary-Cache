@@ -1,0 +1,62 @@
+/*
+@import url('https://fonts.googleapis.com/css2?family=Grandstander&display=swap');
+*/
+
+@font-face
+{
+    font-family: "Grandstander";
+    src: url(../font/Grandstander-Regular.ttf);
+}
+
+.background
+{
+    -fx-background-color: #ECE2D0;
+}
+
+.text-space
+{
+    -fx-background-color: #CEBEBE;
+    -fx-control-inner-background: #CEBEBE;
+}
+
+.label
+{
+    -fx-font-family: "Grandstander";
+    -fx-font-size: 9pt;
+}
+
+#header-label
+{
+    -fx-font-family: "Grandstander";
+    -fx-font-size: 18pt;
+    -fx-text-alignment: center;
+}
+
+#medium-label
+{
+    -fx-font-family: "Grandstander";
+    -fx-font-size: 10pt;
+}
+
+#large-label
+{
+    -fx-font-family: "Grandstander";
+    -fx-font-size: 11pt;
+}
+
+
+.table-view
+{
+    -fx-border-color: #605B56;
+    -fx-background-color: #837A75;
+    -fx-table-cell-border-color: #B8E0D2;
+    -fx-selection-bar: #3AAFB9;
+
+}
+
+.button
+{
+    -fx-font-family: "Grandstander";
+    -fx-font-size: 9pt;
+}
+

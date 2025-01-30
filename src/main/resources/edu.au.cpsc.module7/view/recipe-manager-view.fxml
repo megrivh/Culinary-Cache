@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.RecipeManagerController">
+   <top>
+      <VBox prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="37.0" prefWidth="600.0">
+               <children>
+                  <Label id="header-label" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="224.0" text="Culinary Cache" />
+               </children>
+            </HBox>
+            <MenuBar fx:id="menuBar" prefHeight="28.0" prefWidth="600.0">
+              <menus>
+                <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem fx:id="newRecipeMenuItem" mnemonicParsing="false" onAction="#addRecipeButtonClicked" text="New Recipe">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="exportRecipesMenuItem" mnemonicParsing="false" onAction="#exportRecipes" text="Export Recipes">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                    <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                </Menu>
+                <Menu fx:id="editMenu" mnemonicParsing="false" text="Edit">
+                  <items>
+                        <MenuItem fx:id="editRecipeMenuItem" mnemonicParsing="false" onAction="#editRecipeButtonClicked" text="Edit a Recipe">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="deleteRecipeMenuItem" mnemonicParsing="false" onAction="#deleteRecipeButtonClicked" text="Delete a Recipe">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                </Menu>
+                <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#openAboutDialog" text="About">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <VBox fillWidth="false" prefHeight="67.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="600.0" spacing="15.0">
+               <children>
+                  <Label id="large-label" text="Search for: ">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="searchTextField" prefHeight="26.0" prefWidth="295.0" styleClass="text-space" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Button fx:id="addRecipeButton" mnemonicParsing="false" onAction="#addRecipeButtonClicked" prefHeight="26.0" prefWidth="100.0" text="Add Recipe" />
+                  <Button fx:id="editRecipeButton" mnemonicParsing="false" onAction="#editRecipeButtonClicked" prefHeight="26.0" prefWidth="100.0" text="Edit Recipe" />
+                  <Button fx:id="deleteRecipeButton" mnemonicParsing="false" onAction="#deleteRecipeButtonClicked" prefHeight="26.0" prefWidth="100.0" text="Delete Recipe" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+   <center>
+      <TableView fx:id="recipeTableView" prefHeight="276.0" prefWidth="526.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="categoryColumn" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" resizable="false" text="Category" />
+          <TableColumn fx:id="recipeNameColumn" maxWidth="444.0" minWidth="444.0" prefWidth="444.0" resizable="false" text="Recipe Name" />
+        </columns>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TableView>
+   </center>
+</BorderPane>

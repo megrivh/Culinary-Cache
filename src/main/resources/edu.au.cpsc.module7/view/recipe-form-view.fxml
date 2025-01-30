@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.RecipeFormController">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="123.60001525878909" />
+          <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="489.19998474121087" minWidth="10.0" prefWidth="477.19998474121087" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="72.4" minHeight="9.400001907348638" prefHeight="21.40000190734864" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="147.39999809265137" minHeight="10.0" prefHeight="27.99999237060546" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="178.40000762939454" minHeight="10.0" prefHeight="125.6" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="162.39999999999998" minHeight="10.0" prefHeight="110.4" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label id="medium-label" text="Recipe name: " />
+            <Label id="medium-label" text="Recipe category: " GridPane.rowIndex="1" />
+            <Label id="medium-label" text="Ingredients: " GridPane.rowIndex="2" />
+            <Label id="medium-label" text="Instructions: " GridPane.rowIndex="3" />
+            <TextField fx:id="recipeNameTextField" prefHeight="26.0" prefWidth="404.0" styleClass="text-space" GridPane.columnIndex="1" />
+            <ComboBox fx:id="categoryComboBox" prefHeight="26.0" prefWidth="168.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <VBox prefHeight="98.0" prefWidth="462.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <TextArea fx:id="ingredientsTextArea" prefHeight="109.0" prefWidth="462.0" styleClass="text-space" />
+                  <Label prefHeight="18.0" prefWidth="460.0" text="**Each ingredient must be on a new line" />
+               </children>
+            </VBox>
+            <TextArea fx:id="instructionsTextArea" prefHeight="100.0" prefWidth="467.0" styleClass="text-space" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+   </center>
+   <bottom>
+      <VBox prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="73.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="26.0" prefWidth="100.0" text="Clear" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="26.0" prefWidth="100.0" text="Save" />
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="26.0" prefWidth="100.0" text="Cancel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="37.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="validationLabel" alignment="CENTER" prefHeight="18.0" prefWidth="522.0" text="Validation" visible="false" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+   <top>
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="saveRecipeMenuItem" mnemonicParsing="false" onAction="#saveButtonClicked" text="Save Recipe">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
+              <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Close Window">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+                  <MenuItem fx:id="resetRecipeMenuItem" mnemonicParsing="false" onAction="#clearButtonClicked" text="Reset Recipe Fields">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+                  <MenuItem fx:id="moreHelpMenuItem" mnemonicParsing="false" onAction="#moreHelp" text="More Help">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
