@@ -19,6 +19,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Controller for managing the Recipe Manager view, including functionality for displaying,
+ * adding, editing, deleting, and searching recipes.
+ *
+ * This class is responsible for interacting with the Recipe table, handling user input for
+ * actions such as adding, editing, and deleting recipes, and firing events when
+ * a recipe is selected.
+ */
 public class RecipeManagerController {
     @FXML
     private TableView<Recipe> recipeTableView;
@@ -37,6 +45,10 @@ public class RecipeManagerController {
     private ObservableList<Recipe> recipesList;
     private FilteredList<Recipe> filteredRecipeList;
 
+    /**
+     * Initializes the controller by setting up table columns, binding actions to
+     * buttons, and displaying the list of recipes.
+     */
     @FXML
     public void initialize()
     {
@@ -57,6 +69,10 @@ public class RecipeManagerController {
 
     }
 
+    /**
+     * Handles the event when the user tries to exit the application.
+     * It prompts the user with a confirmation dialog to ensure they want to exit.
+     */
     @FXML
     private void exitApplication()
     {
@@ -77,12 +93,19 @@ public class RecipeManagerController {
         }
     }
 
+    /**
+     * Handles exporting recipes data.
+     * Currently placeholder for export functionality.
+     */
     @FXML
     private void exportRecipes()
     {
         // Export data logic goes here
     }
 
+    /**
+     * Opens the 'About' dialog to display information about the application.
+     */
     @FXML
     private void openAboutDialog()
     {
@@ -97,6 +120,12 @@ public class RecipeManagerController {
         alert.showAndWait();
     }
 
+    /**
+     * Handles mouse click events on the table. If the user double-clicks a recipe, it
+     * opens the form to view the selected recipe's details.
+     *
+     * @param event the mouse click event
+     */
     private void tableViewClicked(MouseEvent event)
     {
         if (event.getClickCount() == 2)
@@ -110,6 +139,9 @@ public class RecipeManagerController {
         }
     }
 
+    /**
+     * Displays all recipes in the recipe table, filtered based on the search text.
+     */
     public void displayRecipes()
     {
         ObservableList<Recipe> recipes = FXCollections.observableArrayList(DbManager.getDatabase().getRecipes());
@@ -130,6 +162,11 @@ public class RecipeManagerController {
         recipeTableView.refresh();
     }
 
+    /**
+     * Fires a custom event when a recipe is selected from the table.
+     *
+     * @see RecipeTableEvent
+     */
     public void tableSelectionChanged()
     {
         Recipe selectedRecipe = recipeTableView.getSelectionModel().getSelectedItem();
@@ -137,12 +174,20 @@ public class RecipeManagerController {
         recipeTableView.fireEvent(event);
     }
 
+    /**
+     * Handles the event when the user clicks the 'Add Recipe' button. Opens the recipe
+     * form for a new recipe.
+     */
     @FXML
     private void addRecipeButtonClicked()
     {
         openRecipeForm(null);
     }
 
+    /**
+     * Handles the event when the user clicks the 'Edit Recipe' button. Opens the recipe
+     * form to edit the selected recipe.
+     */
     @FXML
     private void editRecipeButtonClicked()
     {
@@ -150,6 +195,10 @@ public class RecipeManagerController {
         openRecipeForm(selectedRecipe);
     }
 
+    /**
+     * Handles the event when the user clicks the 'Delete Recipe' button. Deleted the
+     * selected recipe from the database.
+     */
     @FXML
     private void deleteRecipeButtonClicked()
     {
@@ -166,6 +215,11 @@ public class RecipeManagerController {
         recipeTableView.refresh();
     }
 
+    /**
+     * Opens the recipe form to either add or edit a recipe.
+     *
+     * @param recipeToEdit the recipe to edit, or null to add a new recipe
+     */
     private void openRecipeForm(Recipe recipeToEdit)
     {
         try
@@ -198,6 +252,11 @@ public class RecipeManagerController {
         }
     }
 
+    /**
+     * Opens the recipe form in view-only mode for viewing the details of the selected recipe.
+     *
+     * @param selectedRecipe the selected recipe to view
+     */
     private void openViewRecipeForm(Recipe selectedRecipe)
     {
         try
@@ -230,6 +289,9 @@ public class RecipeManagerController {
         }
     }
 
+    /**
+     * Custom event class that is fired when a recipe is selected in the recipe table.
+     */
     public static class RecipeTableEvent extends Event
     {
         public static final EventType<RecipeTableEvent> ANY = new EventType<>(Event.ANY, "ANY");
@@ -237,6 +299,12 @@ public class RecipeManagerController {
 
         private Recipe selectedRecipe;
 
+        /**
+         * Constructs a RecipeTableEvent to indicate that a recipe was selected.
+         *
+         * @param eventType the event type
+         * @param selectedRecipe the selected recipe object
+         */
         public RecipeTableEvent(EventType<? extends Event> eventType, Recipe selectedRecipe)
         {
             super(eventType);

@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 import java.util.Collections;
 import java.util.Optional;
 
+/**
+ * Controller for the Recipe Form view, responsible for handling the user interface actions
+ * related to adding, editing, and clearing recipes in the Culinary Cache application.
+ */
 public class RecipeFormController
 {
     @FXML
@@ -28,12 +32,15 @@ public class RecipeFormController
     private Recipe currentRecipe;
     private RecipeManagerController recipeManagerController;
 
-
+    /**
+     * Initializes the Recipe Form controller by setting up bidirectional bindings and
+     * disabling/enabling buttons based on the recipe model's properties.
+     */
     @FXML
     public void initialize()
     {
         model = new RecipeUIModel();
-        categoryComboBox.getItems().addAll("Breakfast", "Lunch/Dinner",
+        categoryComboBox.getItems().addAll("Breakfast", "Main dish",
                 "Side dish", "Appetizer", "Snack", "Dessert", "Drink");
 
         recipeNameTextField.textProperty().bindBidirectional(model.recipeNameProperty());
@@ -53,11 +60,24 @@ public class RecipeFormController
         clearButton.disableProperty().bind(model.isClearedProperty());
     }
 
+    /**
+     * Sets the RecipeManagerController to allow interaction between the Recipe Form and
+     * the Recipe Manager views.
+     *
+     * @param controller the RecipeManagerController to be set
+     */
     public void setRecipeManagerController(RecipeManagerController controller)
     {
         this.recipeManagerController = controller;
     }
 
+    /**
+     * Sets the current recipe to be edited or viewed. If the provided recipe is not null,
+     * the form fields are populated with the recipe's data, and the form is marked as modified.
+     * If the recipe is null, the form is cleared, and it is marked as a new recipe.
+     *
+     * @param recipe the Recipe object whose details are to be populated into the form
+     */
     public void setCurrentRecipe(Recipe recipe)
     {
         this.currentRecipe = recipe;
@@ -76,12 +96,22 @@ public class RecipeFormController
         }
     }
 
+    /**
+     * Toggles the visibility of the menu bar in the recipe form.
+     *
+     * @param isVisible true if the menu bar should be visible (for editing), false otherwise (for viewing)
+     */
     public void setMenuBarVisible(boolean isVisible)
     {
         menuBar.setVisible(isVisible);
         menuBar.setManaged(isVisible);
     }
 
+    /**
+     * Populates the fields in the form with the details of the specified recipe.
+     *
+     * @param recipe the Recipe object whose details are to be populated into the form
+     */
     private void populateFields(Recipe recipe)
     {
         model.recipeNameProperty().set(recipe.getRecipeName());
@@ -90,6 +120,9 @@ public class RecipeFormController
         model.instructionsProperty().set(recipe.getInstructions());
     }
 
+    /**
+     * Sets the form fields to read-only mode, making them uneditable (for viewing).
+     */
     public void setViewOnlyFields()
     {
         recipeNameTextField.setEditable(false);
@@ -98,6 +131,9 @@ public class RecipeFormController
         instructionsTextArea.setEditable(false);
     }
 
+    /**
+     * Hides the save, clear, and cancel button in the form (for viewing).
+     */
     public void hideButtons()
     {
         saveButton.setVisible(false);
@@ -106,6 +142,9 @@ public class RecipeFormController
 
     }
 
+    /**
+     * Clear all fields in the form, resetting them to their default state.
+     */
     private void clearFields()
     {
         model.recipeNameProperty().set("");
@@ -116,6 +155,27 @@ public class RecipeFormController
         model.isModifiedProperty().set(false);
     }
 
+    /**
+     * Displays a help dialog with how to save, clear, and close the recipe form.
+     */
+    @FXML
+    private void moreHelp()
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("More Help");
+        alert.setHeaderText("How to..");
+        alert.setContentText("1. Save a recipe: Enter required information and click save (or use menu/shortcut options). If the save button is " +
+                "disabled, information is missing or there is nothing to save.\n\n" +
+                "2. Clear the form: Click the clear button (or use menu/shortcut options). If the clear button is disabled, the form " +
+                "is already cleared.\n\n3. Close the window: Click the cancel button (or use menu/shortcut options).");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Event handler for the save button click. Saves the current recipe or creates a new recipe
+     * and stores it in the database. After saving, it updates the Recipe Manager view.
+     */
     @FXML
     private void saveButtonClicked()
     {
@@ -143,20 +203,10 @@ public class RecipeFormController
         closeWindow();
     }
 
-    @FXML
-    private void moreHelp()
-    {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("More Help");
-        alert.setHeaderText("How to..");
-        alert.setContentText("1. Save a recipe: Enter required information and click save (or use menu/shortcut options). If the save button is " +
-                "disabled, information is missing or there is nothing to save.\n\n" +
-                "2. Clear the form: Click the clear button (or use menu/shortcut options). If the clear button is disabled, the form " +
-                "is already cleared.\n\n3. Close the window: Click the cancel button (or use menu/shortcut options).");
-
-        alert.showAndWait();
-    }
-
+    /**
+     * Event handler for the cancel button click. Displays a confirmation dialog asking the user
+     * if they are sure they want to exit without saving their changes. If confirmed, the window is closed.
+     */
     @FXML
     private void cancelButtonClicked()
     {
@@ -180,12 +230,18 @@ public class RecipeFormController
 
     }
 
+    /**
+     * Event handler for the clear button click. Clears all fields in the form.
+     */
     @FXML
     private void clearButtonClicked()
     {
         clearFields();
     }
 
+    /**
+     * Closes the current window.
+     */
     private void closeWindow()
     {
 
